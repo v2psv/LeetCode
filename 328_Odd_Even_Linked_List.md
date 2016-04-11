@@ -13,7 +13,7 @@ return `1->3->5->2->4->NULL`.
 The relative order inside both the even and odd groups should remain as it was in the input. 
 The first node is considered odd, the second node even and so on ...
 
-# NodeList Case#1
+# NodeList Code#1
 
 ```java
 /**
@@ -51,7 +51,7 @@ public class Solution {
 }
 ```
 
-# NodeList Case#2
+# NodeList Code#2
 
 ```java
 /**
