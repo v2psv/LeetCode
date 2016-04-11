@@ -81,6 +81,24 @@ public class Solution {
 }
 ```
 
+# Optimized Popcount
+
+```java
+public class Solution {
+    public int[] countBits(int num) {
+        int[] count = new int[num+1];
+        
+        for (int i = 0; i <= num; i++){
+            int n = i;
+            n -= (n>>>1) & 0x55555555;
+            n = (n & 0x33333333) + ((n>>>2) & 0x33333333);
+            count[i] = (((n + (n>>>4)) & 0x0F0F0F0F) * 0x01010101) >>> 24;
+        }
+        
+        return count;
+    }
+}
+```
 # Reference
 https://leetcode.com/problems/counting-bits/
 
