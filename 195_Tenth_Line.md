@@ -27,5 +27,5 @@ head -10 file.txt | tail -1
 
 # Answer #2
 ```bash
-sed -n '10,10 p' file.txt
+sed -n '10 p' file.txt
 ```
