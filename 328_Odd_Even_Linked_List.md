@@ -13,7 +13,7 @@ return `1->3->5->2->4->NULL`.
 The relative order inside both the even and odd groups should remain as it was in the input. 
 The first node is considered odd, the second node even and so on ...
 
-# NodeList
+# NodeList Case#1
 
 ```java
 /**
@@ -45,6 +45,34 @@ public class Solution {
             lastOdd = pointer2;
             pointer2 = pointer1.next;
             isOdd = !isOdd;
+        }
+        return head;
+    }
+}
+```
+
+# NodeList Case#2
+
+```java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ListNode oddEvenList(ListNode head) {
+        if (head == null) return head;
+        ListNode lastOdd = head, even = head.next, firstEven = even;
+        
+        while (even != null && even.next != null){
+            lastOdd.next = even.next;
+            lastOdd = lastOdd.next;
+            even.next = even.next.next;
+            even = even.next;
+            lastOdd.next = firstEven;
         }
         return head;
     }
