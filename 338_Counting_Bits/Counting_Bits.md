@@ -10,7 +10,7 @@ It is very easy to come up with a solution with run time **O(n*sizeof(integer))*
 Space complexity should be **O(n)**.
 Can you do it like a boss? Do it without using any builtin function like **__builtin_popcount** in c++ or in any other language.
 
-# Code
+# 查找表
 
 ```java
 public class Solution {
@@ -43,6 +43,29 @@ public class Solution {
             count[i] += LOOKUP[(i >>> 24) & 0xff];
         }
 
+        return count;
+    }
+}
+```
+
+# Popcount
+
+```java
+public class Solution {
+    public int[] countBits(int num) {
+        int[] count = new int[num+1];
+        
+        for (int i = 0; i <= num; i++){
+            int n = i;
+            n = (n & 0x55555555) + ((n>>>1) & 0x55555555);
+            n = (n & 0x33333333) + ((n>>>2) & 0x33333333);
+            n = (n & 0x0F0F0F0F) + ((n>>>4) & 0x0F0F0F0F);
+            n = (n & 0x00FF00FF) + ((n>>>8) & 0x00FF00FF);
+            n = (n & 0x0000FFFF) + ((n>>>16)& 0x0000FFFF);
+            
+            count[i] = n;
+        }
+        
         return count;
     }
 }
