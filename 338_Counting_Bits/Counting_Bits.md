@@ -11,6 +11,7 @@ Space complexity should be **O(n)**.
 Can you do it like a boss? Do it without using any builtin function like **__builtin_popcount** in c++ or in any other language.
 
 # 查找表
+首先查找表列出 8 位字节所有的可能（2^8），将 32 位 int 拆成 4 个字节处理，再逐个对整数的每个字节在查找表中找到 1 的个数。
 
 ```java
 public class Solution {
@@ -49,6 +50,13 @@ public class Solution {
 ```
 
 # Popcount
+相邻两个比特相加得到这两个比特 1 的数量，得到 16 组和，再两两相加...
+
+01010101 01010101 01010101 01010101 = 0x55555555
+00110011 00110011 00110011 00110011 = 0x33333333
+00001111 00001111 00001111 00001111 = 0x0F0F0F0F
+00000000 11111111 00000000 11111111 = 0x00FF00FF
+00000000 00000000 11111111 11111111 = 0x0000FFFF
 
 ```java
 public class Solution {
