@@ -5,6 +5,8 @@ For example, given `n = 2`, return `1 (2 = 1 + 1)`; given `n = 10`, return 36 `(
 
 **Note:** you may assume that `n` is not less than 2.
 
+> 注意，题目要求返回类型为 int, 所以当 n 超过 59 就会溢出
+
 ## Code #1
 这是一个 DP 问题，当 **n** 大于等于 4 时，切分成 2 或 3 总能使得乘积取最大值。
 
