@@ -177,16 +177,44 @@ public class Solution {
 ### Code #2
 **状态**
 
-`firstBuy` 当前时间点之前的第一次 `buy` 的最小价格
+`maxFirstBuy` 每个时间点之前的第一次 `buy` 后的最大余额
 
-`firstSell` 当前时间点之前的第一次 `sell` 的最大收益
+`maxFirstSell` 每个时间点之前的第一次 `sell` 的最大余额
 
-`secondBuy` 当前时间点之前的第二次 `buy` 的最大余额
+`maxSecondBuy` 每个时间点之前的第二次 `buy` 后的最大余额
 
-`secondSell` 当前时间点之前的第二次 `sell` 的最大收益
+`maxSecondSell` 每个时间点之前的第二次 `sell` 后的最大余额
 
-时间复杂度 `O(n)`，空间复杂度 `O(n)`， 时间 `2 ms`
+时间复杂度 `O(n)`，空间复杂度 `O(n)`， 时间 `8 ms`
+```java
+public class Solution {
+    public int maxProfit(int[] prices) {
+        int length = prices.length;
+        if (length <= 1)
+            return 0;
 
+        int[] maxFirstBuy = new int[length];
+        int[] maxFirstSell = new int[length];
+        int[] maxSecondBuy = new int[length];
+        int[] maxSecondSell = new int[length];
+        maxFirstBuy[0] = -prices[0];
+        maxFirstSell[0] = 0;
+        maxSecondBuy[0] = Integer.MIN_VALUE;
+        maxSecondSell[0] = 0;
+        
+        for (int i = 1; i < length; i++){
+            maxFirstBuy[i] = Math.max(maxFirstBuy[i-1], -prices[i]);
+            maxFirstSell[i] = Math.max(maxFirstSell[i-1], maxFirstBuy[i]+prices[i]);
+            maxSecondBuy[i] = Math.max(maxSecondBuy[i-1], maxFirstSell[i]-prices[i]);
+            maxSecondSell[i] = Math.max(maxSecondSell[i-1], maxSecondBuy[i]+prices[i]);
+        }
+        
+        return maxSecondSell[length-1];
+    }
+}
+```
+
+精简代码，时间复杂度 `O(n)`，空间复杂度 `O(1)`， 时间 `2 ms`
 ```java
 public class Solution {
     public int maxProfit(int[] prices) {
