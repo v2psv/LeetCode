@@ -143,3 +143,40 @@ public class Solution {
     }
 }
 ```
+
+### Code #2
+**状态**
+
+`firstBuy` 当前时间点之前的第一次 `buy` 的最小价格
+
+`firstSell` 当前时间点之前的第一次 `sell` 的最大收益
+
+`secondBuy` 当前时间点之前的第二次 `buy` 的最小价格
+
+`secondSell` 当前时间点之前的第二次 `sell` 的最大收益
+
+```java
+public class Solution {
+    public int maxProfit(int[] prices) {
+        int length = prices.length;
+        
+        int firstBuy = Integer.MIN_VALUE;
+        int firstSell = 0;
+        int secondBuy = Integer.MIN_VALUE;
+        int secondSell = 0;
+        
+        for (int i = 0; i < length; i++){
+            if (firstBuy < -prices[i])
+                firstBuy = -prices[i];
+            if (firstSell < firstBuy + prices[i])
+                firstSell = firstBuy + prices[i];
+            if (secondBuy < firstSell - prices[i])
+                secondBuy = firstSell - prices[i];
+            if (secondSell < secondBuy + prices[i])
+                secondSell = secondBuy + prices[i];
+        }
+        
+        return secondSell;
+    }
+}
+```
