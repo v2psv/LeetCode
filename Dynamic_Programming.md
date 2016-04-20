@@ -8,22 +8,48 @@ If you were only permitted to complete at most one transaction (ie, buy one and 
 ### Code #1
 **状态**
 
-`maxProfit` 某个时间点的最大收益，需要考虑前一个时间点的最大收益、当前价格与之前的最小价格之差
+`minBuy` 每个时间点之前的最小 `Buy` 价格
+
+`maxPro` 每个时间点之前的最大收益
 
 ```java
 public class Solution {
     public int maxProfit(int[] prices) {
         int length = prices.length;
+        if (length <= 1)
+            return 0;
+
+        int[] minBuy = new int[length];
+        int[] maxPro = new int[length];
+        minBuy[0] = prices[0];
+        maxPro[0] = 0;
         
-        int minPrice = Integer.MAX_VALUE;
-        int maxProfit = 0;
-        
-        for (int i = 0; i < length; i++){
-            maxProfit = Math.max(maxProfit, prices[i]-minPrice);
-            minPrice = Math.min(minPrice, prices[i]);
+        for(int i = 1; i < length; i++) {
+            minBuy[i] = Math.min(minBuy[i-1], prices[i]);
+            maxPro[i] = Math.max(maxPro[i-1], prices[i]-minBuy[i]);
         }
         
-        return maxProfit;
+        return maxPro[length-1];
+    }
+}
+```
+
+简化代码，空间复杂度为 `O(n)`
+
+```java
+public class Solution {
+    public int maxProfit(int[] prices) {
+        int length = prices.length;
+    
+        int minBuy = Integer.MAX_VALUE;
+        int maxPro = 0;
+
+        for(int i = 0; i < length; i++) {
+            minBuy = Math.min(minBuy, prices[i]);
+            maxPro = Math.max(maxPro, prices[i] - minBuy);
+        }
+        
+        return maxPro;
     }
 }
 ```
@@ -66,32 +92,6 @@ public class Solution {
 }
 ```
 
-### Code #3
-**状态**
-
-`minBuy` 某个时间点之前的最小 `Buy` 价格
-
-`maxSell` 某个时间点之前最大收益
-
-```java
-public class Solution {
-    public int maxProfit(int[] prices) {
-        int length = prices.length;
-    
-        int minBuy = Integer.MAX_VALUE;
-        int maxSell = Integer.MIN_VALUE;
-
-        for(int i = 0; i < length; i++) {
-            if (minBuy > prices[i])
-                minBuy = prices[i];
-            if (maxSell < prices[i] - minBuy)
-                maxSell = prices[i] - minBuy;
-        }
-        
-        return maxSell;
-    }
-}
-```
 ## 122. Best Time to Buy and Sell Stock II
 ### Problem
 Say you have an array for which the `ith` element is the price of a given stock on day `i`.
