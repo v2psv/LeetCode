@@ -12,6 +12,8 @@ If you were only permitted to complete at most one transaction (ie, buy one and 
 
 `maxPro` 每个时间点之前的最大收益
 
+时间复杂度 `O(n)`，空间复杂度 `O(n)`， 时间 `4 ms`
+
 ```java
 public class Solution {
     public int maxProfit(int[] prices) {
@@ -34,7 +36,7 @@ public class Solution {
 }
 ```
 
-简化代码，空间复杂度为 `O(n)`
+简化代码，时间复杂度 `O(n)`，空间复杂度 `O(1)`， 时间 `2 ms`
 
 ```java
 public class Solution {
@@ -62,6 +64,8 @@ public class Solution {
 `pMax` 每个时间点之后的最大价格
 
 `maxProfit` 某一时间点之后的最大价格减去之前的最小价格（因为必须在 `buy` 之后才能 `sell`）
+
+时间复杂度 `O(n)`，空间复杂度 `O(n)`， 时间 `2 ms`
 
 ```java
 public class Solution {
