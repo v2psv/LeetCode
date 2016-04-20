@@ -8,9 +8,9 @@ For example, given `n = 2`, return `1 (2 = 1 + 1)`; given `n = 10`, return 36 `(
 > 注意，题目要求返回类型为 int, 所以当 n 超过 59 就会溢出
 
 ## Code #1
+DP 问题，依次求 n=1,2,3...i 的 最优解。
 
 ```java
-DP 问题，依次求 n=1,2,3...i 的 最优解。
 public class Solution {
     public int integerBreak(int n) {
         if (n <= 3) return (n-1);
