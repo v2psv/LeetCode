@@ -66,6 +66,34 @@ public class Solution {
 }
 ```
 
+### Code #3
+**状态**
+
+`minBuy` 某个时间点之前的最小 `Buy` 价格
+
+`maxSell` 某个时间点之前最大收益
+
+```java
+public class Solution {
+    public int maxProfit(int[] prices) {
+        int length = prices.length;
+        if (length <= 1)
+            return 0;
+    
+        int minBuy = Integer.MAX_VALUE;
+        int maxSell = Integer.MIN_VALUE;
+
+        for(int i = 0; i < length; i++) {
+            if (minBuy > prices[i])
+                minBuy = prices[i];
+            if (maxSell < prices[i] - minBuy)
+                maxSell = prices[i] - minBuy;
+        }
+        
+        return maxSell;
+    }
+}
+```
 ## 122. Best Time to Buy and Sell Stock II
 ### Problem
 Say you have an array for which the `ith` element is the price of a given stock on day `i`.
