@@ -33,26 +33,6 @@ public class Solution {
     }
 }
 ```
-```java
-public class Solution {
-    public int integerBreak(int n) {
-        int div = n / 3;
-        int mod = n % 3;
-        int result = 0;
-        
-        if (n <= 3)
-            return (n-1);
-        
-        if (mod == 0)
-            result = (int)Math.pow(3, div);
-        if (mod == 1)
-            result = (int)Math.pow(3, div - 1) * 4;
-        if (mod == 2)
-            result = (int)Math.pow(3, div) * 2;
-        return result;
-    }
-}
-```
 
 ## Code #2
 当 **n** 大于等于 4 时，切分成 2 或 3 总能使得乘积取最大值。
