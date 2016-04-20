@@ -35,7 +35,7 @@ public class Solution {
 
 `pMax` 从右到左顺序的最大价格
 
-`maxProfit` 考虑任意时间点之后的最大价格减去之前的最小价格
+`maxProfit` 某一时间点之后的最大价格减去之前的最小价格
 
 ```java
 public class Solution {
