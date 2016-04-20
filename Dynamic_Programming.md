@@ -8,7 +8,7 @@ If you were only permitted to complete at most one transaction (ie, buy one and 
 ### Code #1
 **状态**
 
-`maxProfit` 当前时间的最大收益，需要考虑前一个时间点的最大收益、当前价格与之前的最小价格之差
+`maxProfit` 某个时间点的最大收益，需要考虑前一个时间点的最大收益、当前价格与之前的最小价格之差
 
 ```java
 public class Solution {
@@ -31,9 +31,9 @@ public class Solution {
 ### Code #2
 **状态**
 
-`pMin` 从左到右顺序的最小价格
+`pMin` 每个时间点之前的最小价格
 
-`pMax` 从右到左顺序的最大价格
+`pMax` 每个时间点之后的最大价格
 
 `maxProfit` 某一时间点之后的最大价格减去之前的最小价格
 
@@ -60,6 +60,32 @@ public class Solution {
 
         for(int i = 0; i < length; i++) {
             maxProfit = Math.max(maxProfit, pMax[i] - pMin[i]);
+        }
+        return maxProfit;
+    }
+}
+```
+
+## 122. Best Time to Buy and Sell Stock II
+### Problem
+Say you have an array for which the `ith` element is the price of a given stock on day `i`.
+
+Design an algorithm to find the maximum profit. You may complete as many transactions as you like (ie, buy one and sell one share of the stock multiple times). However, you may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).
+
+### Code
+**状态**
+
+`maxProfit` 某一时间点之前的最大收益
+
+```java
+public class Solution {
+    public int maxProfit(int[] prices) {
+        int length = prices.length;
+        int maxProfit = 0;
+        
+        for (int i = 1; i < length; i++){
+            if (prices[i] > prices[i-1])
+                maxProfit += prices[i] - prices[i-1];
         }
         return maxProfit;
     }
