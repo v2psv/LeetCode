@@ -181,25 +181,27 @@ public class Solution {
 
 `firstSell` 当前时间点之前的第一次 `sell` 的最大收益
 
-`secondBuy` 当前时间点之前的第二次 `buy` 的最小价格
+`secondBuy` 当前时间点之前的第二次 `buy` 的最大余额
 
 `secondSell` 当前时间点之前的第二次 `sell` 的最大收益
+
+时间复杂度 `O(n)`，空间复杂度 `O(n)`， 时间 `2 ms`
 
 ```java
 public class Solution {
     public int maxProfit(int[] prices) {
         int length = prices.length;
         
-        int firstBuy = Integer.MIN_VALUE;
+        int firstBuy = Integer.MAX_VALUE;
         int firstSell = 0;
         int secondBuy = Integer.MIN_VALUE;
         int secondSell = 0;
         
         for (int i = 0; i < length; i++){
-            if (firstBuy < -prices[i])
-                firstBuy = -prices[i];
-            if (firstSell < firstBuy + prices[i])
-                firstSell = firstBuy + prices[i];
+            if (firstBuy > prices[i])
+                firstBuy = prices[i];
+            if (firstSell < prices[i] - firstBuy)
+                firstSell = prices[i] - firstBuy;
             if (secondBuy < firstSell - prices[i])
                 secondBuy = firstSell - prices[i];
             if (secondSell < secondBuy + prices[i])
