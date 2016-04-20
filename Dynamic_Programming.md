@@ -35,7 +35,7 @@ public class Solution {
 
 `pMax` 每个时间点之后的最大价格
 
-`maxProfit` 某一时间点之后的最大价格减去之前的最小价格
+`maxProfit` 某一时间点之后的最大价格减去之前的最小价格（因为必须在 `buy` 之后才能 `sell`）
 
 ```java
 public class Solution {
