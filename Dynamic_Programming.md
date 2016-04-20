@@ -91,3 +91,55 @@ public class Solution {
     }
 }
 ```
+
+## 123. Best Time to Buy and Sell Stock III
+### Problem
+Say you have an array for which the `ith` element is the price of a given stock on day `i`.
+
+Design an algorithm to find the maximum profit. You may complete at most two transactions.
+
+**Note:**
+
+You may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).
+
+### Code #1
+**状态**
+
+`forward`  每个时间点之前的最大收益
+
+`backword` 每个时间点之后的最大收益
+
+`maxProfit` 某个时间点之前的最大收益与之后的最大收益之和（因为必须 `sell` 之后才能再次 `buy`）
+
+```java
+public class Solution {
+    public int maxProfit(int[] prices) {
+        int length = prices.length;
+        if (length <= 1)
+            return 0;
+
+        int[] forward = new int[length];
+        int[] backword = new int[length];
+        int minForward = prices[0];
+        int maxBackword = prices[length-1];
+        int maxProfit = 0;
+        
+        forward[0] = backword[length-1] = 0;
+        for (int i = 1; i < length; i++){
+            forward[i] = Math.max(forward[i-1], prices[i]-minForward);
+            minForward = Math.min(minForward, prices[i]);
+        }
+        
+        for (int i = length-2; i >= 0; i--){
+            backword[i] = Math.max(backword[i+1], maxBackword-prices[i]);
+            maxBackword = Math.max(maxBackword, prices[i]);
+        }
+        
+        for (int i = 0; i < length; i++){
+            maxProfit = Math.max(forward[i]+backword[i], maxProfit);
+        }
+        
+        return maxProfit;
+    }
+}
+```
