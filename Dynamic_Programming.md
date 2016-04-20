@@ -77,8 +77,6 @@ public class Solution {
 public class Solution {
     public int maxProfit(int[] prices) {
         int length = prices.length;
-        if (length <= 1)
-            return 0;
     
         int minBuy = Integer.MAX_VALUE;
         int maxSell = Integer.MIN_VALUE;
