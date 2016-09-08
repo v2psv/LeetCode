@@ -1,13 +1,13 @@
-**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
+**Table of Contents**
 
-- [Question](#)
-- [查找表](#)
-- [Popcount](#)
-- [Optimized Popcount](#)
-- [Dynamic Programming](#)
-- [Reference](#)
+- [Question](#question)
+- [查找表](#table)
+- [Popcount](#popcount)
+- [Optimized Popcount](#optimized_popcount)
+- [Dynamic Programming](#dp)
+- [Reference](#reference)
 
-# Question
+# Question <a name="question"></a>
 Given a non negative integer number **num**. For every numbers i in the range **0 ≤ i ≤ num** calculate the number of 1's in their binary representation and return them as an array.
 
 **Example:**
@@ -19,7 +19,7 @@ It is very easy to come up with a solution with run time **O(n*sizeof(integer))*
 Space complexity should be **O(n)**.
 Can you do it like a boss? Do it without using any builtin function like **__builtin_popcount** in c++ or in any other language.
 
-# 查找表
+# 查找表 <a name="table"></a>
 首先查找表列出 8 位字节所有的可能（2^8），将 32 位 int 拆成 4 个字节处理，再逐个对整数的每个字节在查找表中找到 1 的个数。
 
 ```java
@@ -58,7 +58,7 @@ public class Solution {
 }
 ```
 
-# Popcount
+# Popcount <a name="popcount"></a>
 先求每 2 个比特中 1 的数量，再求每 4 个比特中 1 的数量，再求每 8 个比特中 1 的数量，再到 16、32 个比特中 1 的数量。
 
 ```
@@ -90,7 +90,7 @@ public class Solution {
 }
 ```
 
-# Optimized Popcount
+# Optimized Popcount <a name="optimized_popcount"></a>
 - `n -= (n>>>1) & 0x55555555;` 等价于 `n = (n & 0x55555555) + ((n>>>1) & 0x55555555);`，求相邻两个比特中 1 的个数；
 - `n = (n & 0x33333333) + ((n>>>2) & 0x33333333);` 同前面的方法；
 - 因为 4 个比特中 1 的个数不大于 `0b0100`，故求和不需要考虑进位，`n + (n>>>4)` 求 8 个比特中 1 的个数；
@@ -113,7 +113,7 @@ public class Solution {
 }
 ```
 
-# Dynamic Programming
+# Dynamic Programming <a name="dp"></a>
 - 若 `i` 是偶数，则 `result[i]=result[i/2]`，即一个偶数 `i` 的二进制中 `1` 的个数与 `2i` 的相同 （一个数的两倍相当于二进制左移一位）
 - 若 `i` 是奇数，相当于 `i-1` 中 `1` 的个数加 1
 ```java
@@ -128,7 +128,7 @@ public class Solution {
 }
 ```
 
-# Reference
+# Reference <a name="reference"></a>
 https://leetcode.com/problems/counting-bits/
 
 http://stackoverflow.com/questions/109023/how-to-count-the-number-of-set-bits-in-a-32-bit-integer
