@@ -1,3 +1,12 @@
+**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
+
+- [Question](#)
+- [查找表](#)
+- [Popcount](#)
+- [Optimized Popcount](#)
+- [Dynamic Programming](#)
+- [Reference](#)
+
 # Question
 Given a non negative integer number **num**. For every numbers i in the range **0 ≤ i ≤ num** calculate the number of 1's in their binary representation and return them as an array.
 
