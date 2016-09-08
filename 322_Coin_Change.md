@@ -27,19 +27,21 @@ You may assume that you have an infinite number of each kind of coin.
 public class Solution {
     public int coinChange(int[] coins, int amount) {
         int[] result = new int[amount+1];
+        int Max = amount + 1;
         
-        Arrays.fill(result, Integer.MAX_VALUE);
+        Arrays.fill(result, Max);
         result[0] = 0;
         
         for (int i = 1; i <= amount; i++){
             for (int coin : coins){
-                if ((coin <= i) && (result[i-coin] != Integer.MAX_VALUE) && (result[i-coin] + 1 < result[i]))
-                    result[i] = result[i-coin] + 1;
+                if (coin <= i)
+                    result[i] = Math.min(result[i], result[i-coin] + 1);
             }
         }
-        return result[amount] == Integer.MAX_VALUE ? -1 : result[amount];
+        return result[amount] == Max ? -1 : result[amount];
     }
 }
+
 ```
 
 # DP2 <a name = "dp2"></a>
