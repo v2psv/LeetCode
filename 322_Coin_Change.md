@@ -38,9 +38,10 @@ public class Solution {
                     result[i] = Math.min(result[i], result[i-coin] + 1);
             }
         }
-        return result[amount] == Max ? -1 : result[amount];
+        return result[amount] > amount ? -1 : result[amount];
     }
 }
+
 
 ```
 
@@ -51,19 +52,19 @@ public class Solution {
     public int coinChange(int[] coins, int amount) {
         int[] result = new int[amount+1];
         
-        Arrays.fill(result, Integer.MAX_VALUE);
+        int Max = amount + 1;
+        Arrays.fill(result, Max);
         result[0] = 0;
         
         for (int coin : coins){
             for (int i = coin; i <= amount; i++){
-                if (result[i-coin] != Integer.MAX_VALUE){
-                    result[i] = Math.min(result[i], result[i-coin] + 1);
-                }
+                result[i] = Math.min(result[i], result[i-coin] + 1);
             }
         }
 
-        return result[amount] == Integer.MAX_VALUE ? -1 : result[amount];
+        return result[amount] > amount ? -1 : result[amount];
     }
 }
+
 
 ```
