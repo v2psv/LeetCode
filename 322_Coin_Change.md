@@ -17,30 +17,46 @@ You are given coins of different denominations and a total amount of money amoun
 
 You may assume that you have an infinite number of each kind of coin.
 
-## Code
-DP 问题，时间复杂度 **O(mn)**
+## DP1
 ```java
 public class Solution {
     public int coinChange(int[] coins, int amount) {
-        Arrays.sort(coins);
-        int[] dp = new int[Math.max(amount+2,coins[coins.length-1]+2)];
-        for (int i = 0; i < amount+1; i++)
-            dp[i] = Integer.MAX_VALUE-100;
-        dp[0]  = 0;
-        for (int i = 0; i < coins.length; i++)
-            dp[coins[i]] = 1;
+        int[] result = new int[amount+1];
         
-        for (int i = 1; i < amount+1; i++){
-            for (int j = 0; j < coins.length && coins[j] < i; j++){
-                if (dp[i] > dp[i-coins[j]] + 1)
-                    dp[i] = dp[i-coins[j]] + 1;
+        Arrays.fill(result, Integer.MAX_VALUE);
+        result[0] = 0;
+        
+        for (int i = 1; i <= amount; i++){
+            for (int coin : coins){
+                if ((coin <= i) && (result[i-coin] != Integer.MAX_VALUE) && (result[i-coin] + 1 < result[i]))
+                    result[i] = result[i-coin] + 1;
             }
         }
-        
-        if (dp[amount] == Integer.MAX_VALUE-100)
-            return -1;
-        else
-            return dp[amount];
+        return result[amount] == Integer.MAX_VALUE ? -1 : result[amount];
     }
 }
+```
+
+## DP2
+
+```java
+public class Solution {
+    public int coinChange(int[] coins, int amount) {
+        int[] result = new int[amount+1];
+        
+        Arrays.fill(result, Integer.MAX_VALUE);
+        result[0] = 0;
+        
+        for (int coin : coins){
+            for (int i = coin; i <= amount; i++){
+                if (result[i-coin] != Integer.MAX_VALUE){
+                    result[i] = Math.min(result[i], result[i-coin] + 1);
+                }
+            }
+        }
+
+        return result[amount] == Integer.MAX_VALUE ? -1 : result[amount];
+    }
+}
+
 ```
