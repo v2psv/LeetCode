@@ -103,6 +103,22 @@ public class Solution {
     }
 }
 ```
+
+# Dynamic Programming
+- 若 `i` 是偶数，则 `result[i]=result[i/2]`，即一个偶数 `i` 的二进制中 `1` 的个数与 `2i` 的相同 （一个数的两倍相当于二进制左移一位）
+- 若 `i` 是奇数，相当于 `i-1` 中 `1` 的个数加 1
+```java
+public class Solution {
+    public int[] countBits(int num) {
+        int[] result = new int[num+1];
+        for (int i = 1; i <= num; i++){
+            result[i] = result[i/2] + i%2;
+        }
+        return result;
+    }
+}
+```
+
 # Reference
 https://leetcode.com/problems/counting-bits/
 
